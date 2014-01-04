@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 from lxml import etree
+from .utils import cacheonceproperty
 
 
 XML_ENCODING = 'utf-8'
@@ -14,13 +15,13 @@ class Tree(object):
             cabocha_xml.encode(XML_ENCODING),
         )
 
-    @property
+    @cacheonceproperty
     def chunks(self):
         chunk_elems = self._element.findall('.//chunk')
         chunks = tuple([Chunk(elem, self) for elem in chunk_elems])
         return chunks
 
-    @property
+    @cacheonceproperty
     def root(self):
         for chunk in self.chunks:
             if chunk.link_to_id == -1:
@@ -44,27 +45,27 @@ class Chunk(object):
     def __eq__(self, other):
         return self._element == other._element
 
-    @property
+    @cacheonceproperty
     def id(self):
         return int(self._element.attrib['id'])
 
-    @property
+    @cacheonceproperty
     def link_to_id(self):
         return int(self._element.attrib['link'])
 
-    @property
+    @cacheonceproperty
     def linked_from_ids(self):
         return tuple([chunk.id for chunk in self.linked])
 
-    @property
+    @cacheonceproperty
     def func_id(self):
         return int(self._element.attrib['func'])
 
-    @property
+    @cacheonceproperty
     def dep(self):
         return self._parent.chunk_by_id(self.link_to_id)
 
-    @property
+    @cacheonceproperty
     def linked(self):
         to_id = self.id
         return [
@@ -73,13 +74,13 @@ class Chunk(object):
             if chunk.link_to_id == to_id
         ]
 
-    @property
+    @cacheonceproperty
     def surface(self):
         tokens = self._tokens()
         texts = [t.text for t in tokens]
         return u''.join(texts)
 
-    @property
+    @cacheonceproperty
     def func_surface(self):
         tid = self.func_id
         tokens = self._tokens()
