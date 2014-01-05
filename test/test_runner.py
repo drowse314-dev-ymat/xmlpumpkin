@@ -21,11 +21,13 @@ class Fixtures:
 
 @runner_unit.test
 def noerror():
-    """cabocha.as_xml(text) witout errors?"""
+    """cabocha.as_xml(text), cabocha.txttree(text) witout errors?"""
     for key in Fixtures.texts:
         text = Fixtures.texts[key]
         xml_text = cabocha.as_xml(text)
+        txt_tree = cabocha.txttree(text)
         assert isinstance(xml_text, unicode)
+        assert isinstance(txt_tree, unicode)
     assert cabocha.as_xml(u'') == u'<sentence />'
 
 @runner_unit.test
@@ -35,6 +37,15 @@ def getxml():
         text = Fixtures.texts[key]
         xml_text = cabocha.as_xml(text)
         etree.fromstring(xml_text.encode('utf-8'))
+
+@runner_unit.test
+def gettxttree():
+    """cabocha.txttree(text) returns text tree?"""
+    for key in Fixtures.texts:
+        text = Fixtures.texts[key]
+        txt_tree = cabocha.txttree(text)
+        assert len(txt_tree) > 3
+        assert txt_tree.endswith(u'EOS\n')
 
 @runner_unit.test
 def correctxml():

@@ -4,6 +4,7 @@ import subprocess
 
 
 CABOCHA_ENCODING = 'utf-8'
+CABOCHA_FORMAT_TREE = '0'
 CABOCHA_FORMAT_XML = '3'
 
 
@@ -21,6 +22,13 @@ class CaboCha(object):
 
     def _filtertext(self, text):
         return not (text == u'')
+
+    def txttree(self, text):
+        text_tree = self._cabocha(
+            text,
+            arguments=['-f', CABOCHA_FORMAT_TREE],
+        )
+        return text_tree.decode(CABOCHA_ENCODING)
 
     def _cabocha(self, text, arguments=tuple()):
         cabocha_process = subprocess.Popen(
