@@ -3,9 +3,6 @@
 from setuptools import setup
 
 
-def get_version():
-    return __import__('xmlpumpkin').__version__
-
 def get_readme():
     return open('README.rst').read()
 
@@ -15,7 +12,7 @@ def get_requirements():
 setup_configs = dict(
 
     name='xmlpumpkin',
-    version=get_version(),
+    version='0.1',
     license='BSD',
     url='https://github.com/drowse314-dev-ymat/xmlpumpkin',
     author='ymat',
