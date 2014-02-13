@@ -8,7 +8,9 @@ Parse XMLs from `CaboCha
 Usage
 -----
 
-Expected usages are focused on chunk surfaces and dependency links::
+Expected usages are focused on chunk surfaces and dependency links:
+
+.. code-block:: python
 
     >>> aisansan = xmlpumpkin.parse_to_tree(
     ...     u'愛燦々とこの身に降って心密かなうれしい涙を流したりして'
@@ -25,11 +27,15 @@ Expected usages are focused on chunk surfaces and dependency links::
     降って
     涙を
 
-You need CaboCha in your path, or shortly with prepared XML::
+You need CaboCha in your path, or shortly with prepared XML:
+
+.. code-block:: python
 
     >>> tree = xmlpumpkin.Tree(xml_as_unicode)
 
-Should you need an easy interface from Python to CaboCha::
+Should you need an easy interface from Python to CaboCha:
+
+.. code-block:: python
 
     >>> from xmlpumpkin import cabocha
     >>> print(cabocha.txttree(
@@ -52,7 +58,9 @@ Should you need an easy interface from Python to CaboCha::
     </sentence>
 
 All I/Os are unicodes!
-If encodings other than UTF-8 is preferred, directly modify following constants::
+If encodings other than UTF-8 is preferred, directly modify following constants:
+
+.. code-block:: python
 
     >>> import xmlpumpkin.runner
     >>> xmlpumpkin.runner.CABOCHA_ENCODING = 'SJIS'
